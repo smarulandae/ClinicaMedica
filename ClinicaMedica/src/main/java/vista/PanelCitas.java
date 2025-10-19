@@ -123,6 +123,7 @@ public class PanelCitas extends JPanel {
         return panel;
     }
     
+    /*
     // El panel de citas no ctualiza
     public void actualizarCombos() {
         cargarCombos();
@@ -132,6 +133,7 @@ public class PanelCitas extends JPanel {
             "Médicos: " + comboMedico.getItemCount(),
             "Actualización", JOptionPane.INFORMATION_MESSAGE);
     }
+    */
     
     private void cargarCombos() {
         // Cargar pacientes

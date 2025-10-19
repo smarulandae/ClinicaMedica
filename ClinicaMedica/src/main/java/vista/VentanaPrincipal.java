@@ -24,9 +24,11 @@ public class VentanaPrincipal extends JFrame {
     private void agregarComponentes() {
         JTabbedPane pestanas = new JTabbedPane();
         
+        /*
         PanelPacientes panelPacientes = new PanelPacientes();
         PanelMedicos panelMedicos = new PanelMedicos();
         PanelCitas panelCitas = new PanelCitas();
+        */
         
         // Agregar paneles
         pestanas.addTab("Pacientes", new PanelPacientes());
@@ -35,7 +37,8 @@ public class VentanaPrincipal extends JFrame {
         
         
         add(pestanas);
-        
+    
+        /*
     // Actualizar paneles
     pestanas.addChangeListener(e -> {
         int indice = pestanas.getSelectedIndex();
@@ -43,6 +46,7 @@ public class VentanaPrincipal extends JFrame {
             panelCitas.actualizarCombos();
         }
         });
+         */
     
     }
 }
