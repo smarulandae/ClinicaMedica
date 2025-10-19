@@ -1,13 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
-/**
- *
- * @author santi
- */
-public class Especialidad {
+public enum Especialidad {
+    MEDICINA_GENERAL("Medicina General"),
+    PEDIATRIA("Pediatría"),
+    CARDIOLOGIA("Cardiología"),
+    DERMATOLOGIA("Dermatología"),
+    GINECOLOGIA("Ginecología"),
+    TRAUMATOLOGIA("Traumatología");
     
+    private String nombre;
+    
+    Especialidad(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
