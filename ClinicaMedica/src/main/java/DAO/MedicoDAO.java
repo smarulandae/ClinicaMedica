@@ -4,17 +4,23 @@ import modelo.Medico;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Clase de acceso a datos para Médico
- * Aplica SRP: Solo maneja persistencia de médicos
- */
 public class MedicoDAO {
+    private static MedicoDAO instancia; // Instancia única
     private List<Medico> medicos;
     private int siguienteId;
     
-    public MedicoDAO() {
+    // Constructor privado
+    private MedicoDAO() {
         medicos = new ArrayList<>();
         siguienteId = 1;
+    }
+    
+    // Método para obtener la única instancia
+    public static MedicoDAO obtenerInstancia() {
+        if (instancia == null) {
+            instancia = new MedicoDAO();
+        }
+        return instancia;
     }
     
     public boolean crear(Medico medico) {

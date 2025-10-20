@@ -12,7 +12,7 @@ public class ControladorCita {
     private CitaDAO dao;
     
     public ControladorCita() {
-        this.dao = new CitaDAO();
+        this.dao = CitaDAO.obtenerInstancia(); // Usar instancia única
     }
     
     public boolean agendarCita(Paciente paciente, Medico medico, LocalDate fecha,

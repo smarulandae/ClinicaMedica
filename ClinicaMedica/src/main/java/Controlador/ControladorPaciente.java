@@ -8,7 +8,7 @@ public class ControladorPaciente {
     private PacienteDAO dao;
     
     public ControladorPaciente() {
-        this.dao = new PacienteDAO();
+        this.dao = PacienteDAO.obtenerInstancia(); // Usar instancia única
     }
     
     public boolean registrarPaciente(String nombre, String apellido, String cedula,

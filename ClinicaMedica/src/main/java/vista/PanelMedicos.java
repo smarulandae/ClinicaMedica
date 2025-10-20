@@ -45,7 +45,7 @@ public class PanelMedicos extends JPanel {
         txtApellido = new JTextField();
         panel.add(txtApellido);
         
-        panel.add(new JLabel("Licencia Médica:"));
+        panel.add(new JLabel("Registro interno:"));
         txtLicencia = new JTextField();
         panel.add(txtLicencia);
         
@@ -83,7 +83,7 @@ public class PanelMedicos extends JPanel {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createTitledBorder("Lista de Médicos"));
         
-        String[] columnas = {"ID", "Nombre", "Apellido", "Licencia", "Especialidad", "Teléfono"};
+        String[] columnas = {"ID", "Nombre", "Apellido", "Número Registro", "Especialidad", "Teléfono"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {

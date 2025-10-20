@@ -1,9 +1,5 @@
 package modelo;
 
-/**
- * Clase que representa un paciente en el sistema
- * Aplica SRP: Solo maneja datos del paciente
- */
 public class Paciente {
     private int id;
     private String nombre;
