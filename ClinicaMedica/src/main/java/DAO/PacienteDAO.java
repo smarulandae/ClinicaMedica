@@ -4,17 +4,23 @@ import modelo.Paciente;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Clase de acceso a datos para Paciente
- */
-
 public class PacienteDAO {
+    private static PacienteDAO instancia; // Instancia única
     private List<Paciente> pacientes;
     private int siguienteId;
     
-    public PacienteDAO() {
+    // Constructor privado para evitar instanciación externa
+    private PacienteDAO() {
         pacientes = new ArrayList<>();
         siguienteId = 1;
+    }
+    
+    // Método para obtener la única instancia
+    public static PacienteDAO obtenerInstancia() {
+        if (instancia == null) {
+            instancia = new PacienteDAO();
+        }
+        return instancia;
     }
     
     // Crear paciente

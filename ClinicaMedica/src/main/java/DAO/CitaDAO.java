@@ -8,12 +8,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CitaDAO {
+    private static CitaDAO instancia; // Instancia única
     private List<Cita> citas;
     private int siguienteId;
     
-    public CitaDAO() {
+    // Constructor privado
+    private CitaDAO() {
         citas = new ArrayList<>();
         siguienteId = 1;
+    }
+    
+    // Método para obtener la única instancia
+    public static CitaDAO obtenerInstancia() {
+        if (instancia == null) {
+            instancia = new CitaDAO();
+        }
+        return instancia;
     }
     
     public boolean crear(Cita cita) {

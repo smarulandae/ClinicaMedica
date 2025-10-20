@@ -9,7 +9,7 @@ public class ControladorMedico {
     private MedicoDAO dao;
     
     public ControladorMedico() {
-        this.dao = new MedicoDAO();
+        this.dao = MedicoDAO.obtenerInstancia(); // Usar instancia única
     }
     
     public boolean registrarMedico(String nombre, String apellido, String licencia,
