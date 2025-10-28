@@ -89,7 +89,7 @@ public class PanelCitas extends JPanel {
         // El panel de citas no se actualiza automáticamente
         // Botón para refrescar combos manualmente:
         panel.add(new JLabel(""));
-        btnRefrescar = new JButton("🔄 Actualizar Listas");
+        btnRefrescar = new JButton("Actualizar Listas");
         panel.add(btnRefrescar);
         
         // Panel de botones
@@ -148,13 +148,14 @@ public class PanelCitas extends JPanel {
     }
     
     /**
-     * Método público para actualizar los combos desde afuera
+     * Método público para actualizar los combos desde afuera importante
      */
     public void actualizarCombos() {
-        System.out.println("\n*** MÉTODO actualizarCombos() LLAMADO ***");
         cargarCombos();
     }
     
+    
+    // Con este nuevo método se actualiza la carga de médico y pacientes
     private void cargarCombos() {
         System.out.println("\nCargando combos");
         
