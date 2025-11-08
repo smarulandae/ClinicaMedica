@@ -1,72 +1,109 @@
-package dao;
+package DAO;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import modelo.Paciente;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PacienteDAO {
-    private static PacienteDAO instancia; // Instancia única
+    private static PacienteDAO instancia;
     private List<Paciente> pacientes;
     private int siguienteId;
-    
-    // Constructor privado para evitar instanciación externa
+    private final Gson gson = new Gson();
+    private static final String RUTA_ARCHIVO = "data/DatosPacientes.json";
+
     private PacienteDAO() {
-        pacientes = new ArrayList<>();
-        siguienteId = 1;
+        pacientes = cargarPacientes();
+        siguienteId = calcularSiguienteId();
     }
-    
-    // Método para obtener la única instancia
+
     public static PacienteDAO obtenerInstancia() {
         if (instancia == null) {
             instancia = new PacienteDAO();
         }
         return instancia;
     }
-    
-    // Crear paciente
+
+    private List<Paciente> cargarPacientes() {
+        File archivo = new File(RUTA_ARCHIVO);
+        if (!archivo.exists()) {
+            archivo.getParentFile().mkdirs(); // Crea carpeta /data si no existe
+            guardarPacientes(new ArrayList<>()); // Crea archivo vacío
+            return new ArrayList<>();
+        }
+
+        try (FileReader reader = new FileReader(archivo)) {
+            Type tipoLista = new TypeToken<ArrayList<Paciente>>() {}.getType();
+            List<Paciente> lista = gson.fromJson(reader, tipoLista);
+            return (lista != null) ? lista : new ArrayList<>();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private void guardarPacientes(List<Paciente> lista) {
+        try (FileWriter writer = new FileWriter(RUTA_ARCHIVO)) {
+            gson.toJson(lista, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean crear(Paciente paciente) {
-        // Validar que no exista la cédula
         if (existeCedula(paciente.getCedula())) {
             return false;
         }
         paciente.setId(siguienteId++);
-        return pacientes.add(paciente);
+        pacientes.add(paciente);
+        guardarPacientes(pacientes);
+        return true;
     }
-    
-    // Leer todos los pacientes
+
     public List<Paciente> obtenerTodos() {
         return new ArrayList<>(pacientes);
     }
-    
-    // Leer paciente por ID
+
     public Paciente obtenerPorId(int id) {
-        for (Paciente p : pacientes) {
-            if (p.getId() == id) {
-                return p;
+        for (Paciente m : pacientes) {
+            if (m.getId() == id) {
+                return m;
             }
         }
         return null;
     }
-    
-    // Actualizar paciente
+
     public boolean actualizar(Paciente paciente) {
         for (int i = 0; i < pacientes.size(); i++) {
             if (pacientes.get(i).getId() == paciente.getId()) {
                 pacientes.set(i, paciente);
+                guardarPacientes(pacientes);
                 return true;
             }
         }
         return false;
     }
-    
-    // Eliminar paciente
+
     public boolean eliminar(int id) {
-        return pacientes.removeIf(p -> p.getId() == id);
+        boolean eliminado = pacientes.removeIf(p -> p.getId() == id);
+        if (eliminado) {
+            guardarPacientes(pacientes);
+        }
+        return eliminado;
     }
-    
-    // Validar si existe cédula
+
     private boolean existeCedula(String cedula) {
         return pacientes.stream()
                 .anyMatch(p -> p.getCedula().equals(cedula));
+    }
+
+    private int calcularSiguienteId() {
+        return pacientes.stream()
+                .mapToInt(Paciente::getId)
+                .max()
+                .orElse(0) + 1;
     }
 }
