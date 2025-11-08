@@ -1,6 +1,6 @@
-package controlador;
+package Controlador;
 
-import dao.PacienteDAO;
+import DAO.PacienteDAO;
 import modelo.Paciente;
 import java.util.List;
 

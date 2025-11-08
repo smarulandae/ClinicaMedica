@@ -1,6 +1,6 @@
 package vista;
 
-import controlador.ControladorPaciente;
+import Controlador.ControladorPaciente;
 import modelo.Paciente;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
