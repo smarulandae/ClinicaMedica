@@ -1,10 +1,12 @@
 package vista;
 
-import controlador.ControladorMedico;
 import modelo.Especialidad;
 import modelo.Medico;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import Controlador.ControladorMedico;
+
 import java.awt.*;
 import java.util.List;
 

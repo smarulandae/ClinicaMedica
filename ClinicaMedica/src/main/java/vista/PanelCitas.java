@@ -1,13 +1,15 @@
 package vista;
 
-import controlador.ControladorCita;
-import controlador.ControladorMedico;
-import controlador.ControladorPaciente;
 import modelo.Cita;
 import modelo.Medico;
 import modelo.Paciente;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import Controlador.ControladorCita;
+import Controlador.ControladorMedico;
+import Controlador.ControladorPaciente;
+
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 
 import modelo.Cita;
 import java.util.ArrayList;

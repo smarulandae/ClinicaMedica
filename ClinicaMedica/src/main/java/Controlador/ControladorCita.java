@@ -1,12 +1,14 @@
-package controlador;
+package Controlador;
 
-import dao.CitaDAO;
 import modelo.Cita;
 import modelo.Medico;
 import modelo.Paciente;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+
+import DAO.CitaDAO;
+
 import java.util.ArrayList;
 
 public class ControladorCita {
