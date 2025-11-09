@@ -1,6 +1,6 @@
 package vista;
 
-import Controlador.ControladorMedico;
+import controlador.ControladorMedico;
 import modelo.Especialidad;
 import modelo.Medico;
 import javax.swing.*;

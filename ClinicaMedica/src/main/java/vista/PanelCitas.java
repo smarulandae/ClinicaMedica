@@ -1,8 +1,8 @@
 package vista;
 
-import Controlador.ControladorCita;
-import Controlador.ControladorMedico;
-import Controlador.ControladorPaciente;
+import controlador.ControladorCita;
+import controlador.ControladorMedico;
+import controlador.ControladorPaciente;
 import modelo.Cita;
 import modelo.Medico;
 import modelo.Paciente;

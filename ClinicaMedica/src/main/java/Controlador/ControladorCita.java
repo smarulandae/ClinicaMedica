@@ -1,6 +1,6 @@
-package Controlador;
+package controlador;
 
-import DAO.CitaDAO;
+import dao.CitaDAO;
 import modelo.Cita;
 import modelo.Medico;
 import modelo.Paciente;

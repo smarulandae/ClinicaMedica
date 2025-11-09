@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import modelo.Cita;
 import java.util.ArrayList;
@@ -237,11 +237,16 @@ public class CitaDAO {
                 return false;
             }
             
-            return citas.stream()
-                    .anyMatch(c -> c.getMedico() != null && 
-                                   c.getMedico().getId() == cita.getMedico().getId()
-                            && c.getFecha() != null && c.getFecha().equals(cita.getFecha())
-                            && c.getHora() != null && c.getHora().equals(cita.getHora()));
+                    return citas.stream()
+                .anyMatch(c ->
+                        (c.getMedico().getId() == cita.getMedico().getId()
+                        && c.getFecha().equals(cita.getFecha())
+                        && c.getHora().equals(cita.getHora()))
+                        ||
+                        (c.getPaciente().getId() == cita.getPaciente().getId()
+                        && c.getFecha().equals(cita.getFecha())
+                        && c.getHora().equals(cita.getHora()))
+                );
         } catch (Exception e) {
             System.err.println("Error al verificar existencia de cita: " + e.getMessage());
             e.printStackTrace();

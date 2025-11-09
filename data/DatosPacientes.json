@@ -1,10 +1,1 @@
-[
-  {
-    "id": 1,
-    "nombre": "Camilo ",
-    "apellido": "Ramirez",
-    "cedula": "1233211234",
-    "telefono": "3213211234",
-    "direccion": ""
-  }
-]
+[{"id":1,"nombre":"Camilo ","apellido":"Ramirez","cedula":"1233211234","telefono":"3213211234","direccion":""},{"id":2,"nombre":"juan","apellido":"uuuu","cedula":"8888899","telefono":"eeee","direccion":"uuuu"},{"id":3,"nombre":"jj","apellido":"hh","cedula":"999","telefono":"+57302002628p","direccion":""}]

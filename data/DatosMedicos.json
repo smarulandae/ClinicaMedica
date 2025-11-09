@@ -1,10 +1,1 @@
-[
-  {
-    "id": 1,
-    "nombre": "Juan",
-    "apellido": "Mosquera",
-    "licencia": "1",
-    "especialidad": "MEDICINA_GENERAL",
-    "telefono": ""
-  }
-]
+[{"id":1,"nombre":"Juan","apellido":"Mosquera","licencia":"1","especialidad":"MEDICINA_GENERAL","telefono":""},{"id":2,"nombre":"Omar","apellido":"Perez","licencia":"yy3433","especialidad":"PEDIATRIA","telefono":"3202229990"}]

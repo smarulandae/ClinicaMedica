@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
