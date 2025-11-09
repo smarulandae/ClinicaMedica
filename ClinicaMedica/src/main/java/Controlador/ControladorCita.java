@@ -32,7 +32,9 @@ public class ControladorCita {
                 System.err.println("Error: Datos incompletos para agendar cita");
                 return false;
             }
-            
+            if (fecha.isBefore(LocalDate.now())) {
+            return false;
+            }
             Cita cita = new Cita(0, paciente, medico, fecha, hora, motivo, "");
             return dao.crear(cita);
             

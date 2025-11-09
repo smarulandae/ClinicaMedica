@@ -67,5 +67,74 @@
     "hora": "10:00:00",
     "motivo": "Dolor en el pie",
     "diagnostico": ""
+  },
+  {
+    "id": 4,
+    "paciente": {
+      "id": 1,
+      "nombre": "Camilo",
+      "apellido": "Ramirez",
+      "cedula": "1233211234",
+      "telefono": "3213211234",
+      "direccion": ""
+    },
+    "medico": {
+      "id": 1,
+      "nombre": "Juan",
+      "apellido": "Mosquera",
+      "licencia": "1",
+      "especialidad": "MEDICINA_GENERAL",
+      "telefono": ""
+    },
+    "fecha": "2025-11-10",
+    "hora": "09:00:00",
+    "motivo": "si",
+    "diagnostico": ""
+  },
+  {
+    "id": 5,
+    "paciente": {
+      "id": 1,
+      "nombre": "Camilo",
+      "apellido": "Ramirez",
+      "cedula": "1233211234",
+      "telefono": "3213211234",
+      "direccion": ""
+    },
+    "medico": {
+      "id": 1,
+      "nombre": "Juan",
+      "apellido": "Mosquera",
+      "licencia": "1",
+      "especialidad": "MEDICINA_GENERAL",
+      "telefono": ""
+    },
+    "fecha": "2025-11-07",
+    "hora": "09:00:00",
+    "motivo": "no",
+    "diagnostico": ""
+  },
+  {
+    "id": 6,
+    "paciente": {
+      "id": 1,
+      "nombre": "Camilo",
+      "apellido": "Ramirez",
+      "cedula": "1233211234",
+      "telefono": "3213211234",
+      "direccion": ""
+    },
+    "medico": {
+      "id": 1,
+      "nombre": "Juan",
+      "apellido": "Mosquera",
+      "licencia": "1",
+      "especialidad": "MEDICINA_GENERAL",
+      "telefono": ""
+    },
+    "fecha": "2025-11-09",
+    "hora": "10:15:00",
+    "motivo": "s",
+    "diagnostico": ""
   }
 ]

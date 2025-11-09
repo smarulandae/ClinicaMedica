@@ -287,7 +287,12 @@ public class PanelCitas extends JPanel {
                 cargarCitas();
             } else {
                 System.out.println("Error al guardar cita");
-                JOptionPane.showMessageDialog(this, "Verifique los datos o cita duplicada",
+                if (fecha.isBefore(LocalDate.now()) || hora.isBefore(LocalTime.now())) {
+                    JOptionPane.showMessageDialog(this, "Verifique que la fecha y hora sean correctas",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                JOptionPane.showMessageDialog(this, "Verifique los datos ingresados",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
             
