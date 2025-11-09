@@ -217,6 +217,20 @@ public class PanelPacientes extends JPanel {
                 return;
             }
 
+            if (!txtCedula.getText().matches("\\d+")) {
+                JOptionPane.showMessageDialog(this,
+                        "La cédula solo puede contener números",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            // Intento validar teléfono (que sean sólo números y pueda incluir +57)
+            if (!txtTelefono.getText().matches("^(\\+57\\s?)?\\d{10}$")) {
+                JOptionPane.showMessageDialog(this,
+                        "El teléfono debe tener 10 dígitos y puede incluir el prefijo +57",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             int id = (int) modeloTabla.getValueAt(filaSeleccionada, 0);
             String telefono = (txtTelefono.getText() != null) ? txtTelefono.getText() : "";
             String direccion = (txtDireccion.getText() != null) ? txtDireccion.getText() : "";

@@ -44,5 +44,28 @@
     "hora": "10:00:00",
     "motivo": "Dolor en el abdomen",
     "diagnostico": ""
+  },
+  {
+    "id": 3,
+    "paciente": {
+      "id": 3,
+      "nombre": "jj",
+      "apellido": "hh",
+      "cedula": "999",
+      "telefono": "+573020026280",
+      "direccion": ""
+    },
+    "medico": {
+      "id": 2,
+      "nombre": "Omar",
+      "apellido": "Perez",
+      "licencia": "yy3433",
+      "especialidad": "PEDIATRIA",
+      "telefono": "3202229990"
+    },
+    "fecha": "2025-11-09",
+    "hora": "10:00:00",
+    "motivo": "Dolor en el pie",
+    "diagnostico": ""
   }
 ]

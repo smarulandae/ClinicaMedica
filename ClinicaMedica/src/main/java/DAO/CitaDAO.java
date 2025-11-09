@@ -180,6 +180,13 @@ public class CitaDAO {
                 return false;
             }
             
+            //validar que no exista al actualizar
+            if (existeCita(cita)){
+                System.err.println("Error: Cita duplicada");
+                return false;
+             }
+
+            
             for (int i = 0; i < citas.size(); i++) {
                 if (citas.get(i).getId() == cita.getId()) {
                     citas.set(i, cita);
