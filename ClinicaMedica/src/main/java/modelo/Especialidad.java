@@ -6,7 +6,8 @@ public enum Especialidad {
     CARDIOLOGIA("Cardiología"),
     DERMATOLOGIA("Dermatología"),
     GINECOLOGIA("Ginecología"),
-    TRAUMATOLOGIA("Traumatología");
+    TRAUMATOLOGIA("Traumatología"),
+    RADIOLOGIA("Radiologia");
     
     private String nombre;
     

@@ -17,9 +17,17 @@ public class PanelMedicos extends JPanel {
     private JButton btnGuardar, btnActualizar, btnEliminar, btnLimpiar;
     
     public PanelMedicos() {
-        controlador = new ControladorMedico();
-        inicializarComponentes();
-        cargarMedicos();
+        try {
+            controlador = new ControladorMedico();
+            inicializarComponentes();
+            cargarMedicos();
+        } catch (Exception e) {
+            System.err.println("Error crítico al inicializar PanelMedicos: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                "Error al inicializar el panel de médicos",
+                "Error Crítico", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void inicializarComponentes() {
@@ -30,7 +38,7 @@ public class PanelMedicos extends JPanel {
         add(panelFormulario, BorderLayout.NORTH);
         
         JPanel panelTabla = crearPanelTabla();
-        add(panelTabla, BorderLayout.CENTER);
+add(panelTabla, BorderLayout.CENTER);
     }
     
     private JPanel crearPanelFormulario() {
@@ -107,110 +115,267 @@ public class PanelMedicos extends JPanel {
     }
     
     private void guardarMedico() {
-        boolean exito = controlador.registrarMedico(
-            txtNombre.getText(),
-            txtApellido.getText(),
-            txtLicencia.getText(),
-            (Especialidad) comboEspecialidad.getSelectedItem(),
-            txtTelefono.getText()
-        );
-        
-        if (exito) {
-            JOptionPane.showMessageDialog(this, "Médico registrado exitosamente");
-            limpiarCampos();
-            cargarMedicos();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error: Verifique los datos o licencia duplicada",
+        try {
+            // Validar que los campos no estén vacíos
+            if (txtNombre.getText() == null || txtNombre.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Debe ingresar el nombre del médico",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            if (txtApellido.getText() == null || txtApellido.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Debe ingresar el apellido del médico",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            if (txtLicencia.getText() == null || txtLicencia.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Debe ingresar el número de registro del médico",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            Especialidad especialidadSeleccionada = (Especialidad) comboEspecialidad.getSelectedItem();
+            if (especialidadSeleccionada == null) {
+                JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar una especialidad",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            String telefono = (txtTelefono.getText() != null) ? txtTelefono.getText() : "";
+            
+            boolean exito = controlador.registrarMedico(
+                txtNombre.getText().trim(),
+                txtApellido.getText().trim(),
+                txtLicencia.getText().trim(),
+                especialidadSeleccionada,
+                telefono.trim()
+            );
+            
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Médico registrado exitosamente");
+                limpiarCampos();
+                cargarMedicos();
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                    "Error: Verifique los datos o el número de registro ya está registrado",
                     "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } catch (NullPointerException e) {
+            System.err.println("Error: Campo nulo al guardar médico - " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                "Error: Algunos campos están vacíos",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            System.err.println("Error inesperado al guardar médico: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                "Error inesperado: " + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     private void actualizarMedico() {
-        int filaSeleccionada = tablaMedicos.getSelectedRow();
-        if (filaSeleccionada == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un médico");
-            return;
-        }
-        
-        int id = (int) modeloTabla.getValueAt(filaSeleccionada, 0);
-        boolean exito = controlador.actualizarMedico(
-            id,
-            txtNombre.getText(),
-            txtApellido.getText(),
-            txtLicencia.getText(),
-            (Especialidad) comboEspecialidad.getSelectedItem(),
-            txtTelefono.getText()
-        );
-        
-        if (exito) {
-            JOptionPane.showMessageDialog(this, "Médico actualizado exitosamente");
-            limpiarCampos();
-            cargarMedicos();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al actualizar",
+        try {
+            int filaSeleccionada = tablaMedicos.getSelectedRow();
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione un médico de la tabla");
+                return;
+            }
+            
+            // Validar campos
+            if (txtNombre.getText() == null || txtNombre.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Debe ingresar el nombre del médico",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            if (txtApellido.getText() == null || txtApellido.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Debe ingresar el apellido del médico",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            if (txtLicencia.getText() == null || txtLicencia.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Debe ingresar el número de registro del médico",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            int id = (int) modeloTabla.getValueAt(filaSeleccionada, 0);
+            Especialidad especialidadSeleccionada = (Especialidad) comboEspecialidad.getSelectedItem();
+            
+            if (especialidadSeleccionada == null) {
+                JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar una especialidad",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            String telefono = (txtTelefono.getText() != null) ? txtTelefono.getText() : "";
+            
+            boolean exito = controlador.actualizarMedico(
+                id,
+                txtNombre.getText().trim(),
+                txtApellido.getText().trim(),
+                txtLicencia.getText().trim(),
+                especialidadSeleccionada,
+                telefono.trim()
+            );
+            
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Médico actualizado exitosamente");
+                limpiarCampos();
+                cargarMedicos();
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                    "Error al actualizar el médico",
                     "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("Error: Índice fuera de rango - " + e.getMessage());
+            JOptionPane.showMessageDialog(this, 
+                "Error al acceder a los datos de la tabla",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassCastException e) {
+            System.err.println("Error: Tipo de dato incorrecto - " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                "Error al leer los datos de la tabla",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            System.err.println("Error inesperado al actualizar: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                "Error inesperado: " + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     private void eliminarMedico() {
-        int filaSeleccionada = tablaMedicos.getSelectedRow();
-        if (filaSeleccionada == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un médico");
-            return;
-        }
-        
-        int confirmacion = JOptionPane.showConfirmDialog(this,
-                "¿Está seguro de eliminar este médico?",
-                "Confirmar", JOptionPane.YES_NO_OPTION);
-        
-        if (confirmacion == JOptionPane.YES_OPTION) {
-            int id = (int) modeloTabla.getValueAt(filaSeleccionada, 0);
-            if (controlador.eliminarMedico(id)) {
-                JOptionPane.showMessageDialog(this, "Médico eliminado");
-                limpiarCampos();
-                cargarMedicos();
+        try {
+            int filaSeleccionada = tablaMedicos.getSelectedRow();
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione un médico de la tabla");
+                return;
             }
+            
+            int confirmacion = JOptionPane.showConfirmDialog(this,
+                    "¿Está seguro de eliminar este médico?",
+                    "Confirmar", JOptionPane.YES_NO_OPTION);
+            
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                int id = (int) modeloTabla.getValueAt(filaSeleccionada, 0);
+                if (controlador.eliminarMedico(id)) {
+                    JOptionPane.showMessageDialog(this, "Médico eliminado correctamente");
+                    limpiarCampos();
+                    cargarMedicos();
+                } else {
+                    JOptionPane.showMessageDialog(this, 
+                        "No se pudo eliminar el médico",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("Error: Índice fuera de rango - " + e.getMessage());
+            JOptionPane.showMessageDialog(this, 
+                "Error al acceder a los datos de la tabla",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            System.err.println("Error al eliminar médico: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                "Error inesperado: " + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     private void cargarMedicos() {
-        modeloTabla.setRowCount(0);
-        List<Medico> medicos = controlador.obtenerTodosLosMedicos();
-        
-        for (Medico m : medicos) {
-            Object[] fila = {
-                m.getId(),
-                m.getNombre(),
-                m.getApellido(),
-                m.getLicencia(),
-                m.getEspecialidad().getNombre(),
-                m.getTelefono()
-            };
-            modeloTabla.addRow(fila);
+        try {
+            modeloTabla.setRowCount(0);
+            List<Medico> medicos = controlador.obtenerTodosLosMedicos();
+            
+            for (Medico m : medicos) {
+                if (m != null && m.getEspecialidad() != null) {
+                    Object[] fila = {
+                        m.getId(),
+                        (m.getNombre() != null) ? m.getNombre() : "",
+                        (m.getApellido() != null) ? m.getApellido() : "",
+                        (m.getLicencia() != null) ? m.getLicencia() : "",
+                        m.getEspecialidad().getNombre(),
+                        (m.getTelefono() != null) ? m.getTelefono() : ""
+                    };
+                    modeloTabla.addRow(fila);
+                }
+            }
+            
+        } catch (NullPointerException e) {
+            System.err.println("Error: Dato nulo al cargar médicos - " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Error al cargar médicos: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                "Error al cargar la lista de médicos",
+                "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     private void cargarMedicoSeleccionado() {
-        int fila = tablaMedicos.getSelectedRow();
-        txtNombre.setText(modeloTabla.getValueAt(fila, 1).toString());
-        txtApellido.setText(modeloTabla.getValueAt(fila, 2).toString());
-        txtLicencia.setText(modeloTabla.getValueAt(fila, 3).toString());
-        String especialidad = modeloTabla.getValueAt(fila, 4).toString();
-        for (Especialidad e : Especialidad.values()) {
-            if (e.getNombre().equals(especialidad)) {
-                comboEspecialidad.setSelectedItem(e);
-                break;
+        try {
+            int fila = tablaMedicos.getSelectedRow();
+            if (fila >= 0 && fila < modeloTabla.getRowCount()) {
+                Object nombre = modeloTabla.getValueAt(fila, 1);
+                Object apellido = modeloTabla.getValueAt(fila, 2);
+                Object licencia = modeloTabla.getValueAt(fila, 3);
+                Object especialidadNombre = modeloTabla.getValueAt(fila, 4);
+                Object telefono = modeloTabla.getValueAt(fila, 5);
+                
+                txtNombre.setText((nombre != null) ? nombre.toString() : "");
+                txtApellido.setText((apellido != null) ? apellido.toString() : "");
+                txtLicencia.setText((licencia != null) ? licencia.toString() : "");
+                txtTelefono.setText((telefono != null) ? telefono.toString() : "");
+                
+                if (especialidadNombre != null) {
+                    String especialidad = especialidadNombre.toString();
+                    for (Especialidad e : Especialidad.values()) {
+                        if (e.getNombre().equals(especialidad)) {
+                            comboEspecialidad.setSelectedItem(e);
+                            break;
+                        }
+                    }
+                }
             }
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("Error: Índice fuera de rango al cargar selección - " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error al cargar médico seleccionado: " + e.getMessage());
+            e.printStackTrace();
         }
-        txtTelefono.setText(modeloTabla.getValueAt(fila, 5).toString());
     }
     
     private void limpiarCampos() {
-        txtNombre.setText("");
-        txtApellido.setText("");
-        txtLicencia.setText("");
-        txtTelefono.setText("");
-        comboEspecialidad.setSelectedIndex(0);
-        tablaMedicos.clearSelection();
+        try {
+            txtNombre.setText("");
+            txtApellido.setText("");
+            txtLicencia.setText("");
+            txtTelefono.setText("");
+            comboEspecialidad.setSelectedIndex(0);
+            tablaMedicos.clearSelection();
+        } catch (Exception e) {
+            System.err.println("Error al limpiar campos: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

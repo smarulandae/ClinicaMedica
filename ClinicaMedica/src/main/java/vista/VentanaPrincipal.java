@@ -3,10 +3,9 @@ package vista;
 import javax.swing.*;
 //import java.awt.*;
 
-/**
- * Ventana principal de la aplicación
- * Aplica SRP: Solo coordina la navegación entre paneles
- */
+// Ventana principal de la aplicación
+ // Aplica SRP: Solo coordina la navegación entre paneles
+
 public class VentanaPrincipal extends JFrame {
     
     public VentanaPrincipal() {
