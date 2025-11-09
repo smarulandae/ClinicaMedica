@@ -136,6 +136,13 @@ public class PanelPacientes extends JPanel {
                 return;
             }
             
+            if (!txtCedula.getText().matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, 
+                    "La cédula solo puede contener números",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
             String telefono = (txtTelefono.getText() != null) ? txtTelefono.getText() : "";
             String direccion = (txtDireccion.getText() != null) ? txtDireccion.getText() : "";
             
