@@ -1,9 +1,11 @@
 package Controlador;
 
-import DAO.MedicoDAO;
 import modelo.Especialidad;
 import modelo.Medico;
 import java.util.List;
+
+import DAO.MedicoDAO;
+
 import java.util.ArrayList;
 
 public class ControladorMedico {

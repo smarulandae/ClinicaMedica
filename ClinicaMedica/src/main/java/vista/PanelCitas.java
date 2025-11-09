@@ -1,13 +1,15 @@
 package vista;
 
-import Controlador.ControladorCita;
-import Controlador.ControladorMedico;
-import Controlador.ControladorPaciente;
 import modelo.Cita;
 import modelo.Medico;
 import modelo.Paciente;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import Controlador.ControladorCita;
+import Controlador.ControladorMedico;
+import Controlador.ControladorPaciente;
+
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -285,7 +287,12 @@ public class PanelCitas extends JPanel {
                 cargarCitas();
             } else {
                 System.out.println("Error al guardar cita");
-                JOptionPane.showMessageDialog(this, "Verifique los datos o cita duplicada",
+                if (fecha.isBefore(LocalDate.now()) || hora.isBefore(LocalTime.now())) {
+                    JOptionPane.showMessageDialog(this, "Verifique que la fecha y hora sean correctas",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                JOptionPane.showMessageDialog(this, "Verifique los datos ingresados",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
             

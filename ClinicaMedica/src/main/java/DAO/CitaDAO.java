@@ -180,6 +180,13 @@ public class CitaDAO {
                 return false;
             }
             
+            //validar que no exista al actualizar
+            if (existeCita(cita)){
+                System.err.println("Error: Cita duplicada");
+                return false;
+             }
+
+            
             for (int i = 0; i < citas.size(); i++) {
                 if (citas.get(i).getId() == cita.getId()) {
                     citas.set(i, cita);
@@ -237,11 +244,16 @@ public class CitaDAO {
                 return false;
             }
             
-            return citas.stream()
-                    .anyMatch(c -> c.getMedico() != null && 
-                                   c.getMedico().getId() == cita.getMedico().getId()
-                            && c.getFecha() != null && c.getFecha().equals(cita.getFecha())
-                            && c.getHora() != null && c.getHora().equals(cita.getHora()));
+                    return citas.stream()
+                .anyMatch(c ->
+                        (c.getMedico().getId() == cita.getMedico().getId()
+                        && c.getFecha().equals(cita.getFecha())
+                        && c.getHora().equals(cita.getHora()))
+                        ||
+                        (c.getPaciente().getId() == cita.getPaciente().getId()
+                        && c.getFecha().equals(cita.getFecha())
+                        && c.getHora().equals(cita.getHora()))
+                );
         } catch (Exception e) {
             System.err.println("Error al verificar existencia de cita: " + e.getMessage());
             e.printStackTrace();

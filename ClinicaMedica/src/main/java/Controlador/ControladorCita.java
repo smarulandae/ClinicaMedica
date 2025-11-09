@@ -1,12 +1,14 @@
 package Controlador;
 
-import DAO.CitaDAO;
 import modelo.Cita;
 import modelo.Medico;
 import modelo.Paciente;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+
+import DAO.CitaDAO;
+
 import java.util.ArrayList;
 
 public class ControladorCita {
@@ -30,7 +32,9 @@ public class ControladorCita {
                 System.err.println("Error: Datos incompletos para agendar cita");
                 return false;
             }
-            
+            if (fecha.isBefore(LocalDate.now())) {
+            return false;
+            }
             Cita cita = new Cita(0, paciente, medico, fecha, hora, motivo, "");
             return dao.crear(cita);
             
